@@ -26,7 +26,7 @@ const TwilightZone = ({ onCreatureClick }) => {
           }
         }}
       >
-        <source src="/videos/The_Twilight_Zone_background.mp4" type="video/mp4" />
+        <source src={`${import.meta.env.BASE_URL}videos/The_Twilight_Zone_background.mp4`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       
