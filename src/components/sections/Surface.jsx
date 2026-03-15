@@ -1,0 +1,58 @@
+import React from 'react';
+import { creatureData } from '../../data/creatureData';
+import Goldfish from '../creatures/Goldfish';
+import SeaTurtle from '../creatures/SeaTurtle';
+
+const Surface = ({ onCreatureClick }) => {
+  return (
+    <section id="home" className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-cyan-900 via-blue-900 to-primary">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        onError={(e) => {
+          console.error('Video load error:', e);
+          // Add fallback background if video fails to load
+          const video = e.target;
+          if (video) {
+            video.style.display = 'none';
+            const fallback = document.createElement('div');
+            fallback.className = 'absolute top-0 left-0 w-full h-full bg-gradient-to-b from-cyan-900 via-blue-900 to-primary z-0';
+            video.parentNode.insertBefore(fallback, video);
+          }
+        }}
+      >
+        <source src="/videos/The_Surface_background.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Overlay for darkening the video slightly to make text more readable */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/30 z-10"></div>
+
+      {/* Centered Text Content */}
+      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 pointer-events-none">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
+          <span className="text-glow">Underwater World</span>
+        </h1>
+        <p className="text-lg md:text-xl text-gray-300 max-w-2xl">
+          Welcome to an immersive journey beneath the waves. Scroll to explore the depths of the ocean and click on the creatures to learn their secrets.
+        </p>
+      </div>
+      
+      {/* Creatures */}
+      <div className="absolute top-0 left-0 w-full h-full z-30">
+        <Goldfish onClick={() => onCreatureClick(creatureData.goldfish)} />
+        <SeaTurtle onClick={() => onCreatureClick(creatureData.seaTurtle)} />
+      </div>
+
+      {/* Bottom Blending Gradient */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary to-transparent z-20"></div>
+    </section>
+  );
+};
+
+export default Surface;

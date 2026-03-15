@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-primary text-gray-100 font-sans;
+    overflow: hidden; /* Prevent body scroll */
+  }
+  
+  body {
+    @apply bg-primary text-gray-100 font-sans;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent body scroll */
+    /* Hide scrollbar for all browsers */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+@layer components {
+  /* Scroll snapping container */
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    /* Removed scroll-behavior to prevent conflict with JS scrolling */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .snap-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  /* Individual snap sections */
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 8px theme('colors.highlight'), 0 0 20px theme('colors.accent');
+  }
+
+  /* This will be used for the modal images */
+  .bubble-img {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+  
+  /* Gooey/wet texture effect for creatures */
+  .goo-texture {
+    filter: url('#goo');
+  }
+  
+  /* Glassy reflection effect */
+  .glassy {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 100%
+    );
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* SVG Filter for gooey effect */
+.goo-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
